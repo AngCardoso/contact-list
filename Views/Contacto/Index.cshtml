@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<ContactModel>
+@{
     ViewData["Title"] = "Contact List";
 }
 
@@ -20,42 +21,28 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>mark@mailmail.com</td>
-                <td>9639639633</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a role="button" class="btn btn-outline-success" asp-controller="Contacto" asp-action="Edit">Edit</a>
-                        <a role="button" class="btn btn-outline-danger" asp-controller="Contacto" asp-action="ConfirmDelete">Delete</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>jacobmail@mailmail.com</td>
-                <td>9658528742</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a role="button" class="btn btn-outline-success" asp-controller="Contacto" asp-action="Edit">Edit</a>
-                        <a role="button" class="btn btn-outline-danger" asp-controller="Contacto" asp-action="ConfirmDelete">Delete</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>thebirdhasamail@mail.com</td>
-                <td>914257825</td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a role="button" class="btn btn-outline-success" asp-controller="Contacto" asp-action="Edit">Edit</a>
-                        <a role="button" class="btn btn-outline-danger" asp-controller="Contacto" asp-action="ConfirmDelete">Delete</a>
-                    </div>
-                </td>
-            </tr>
+
+            @{
+                if (Model != null && Model.Any())
+                {
+                    foreach (ContactModel contact in Model)
+                    {
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>@contact.Name</td>
+                            <td>@contact.Email</td>
+                            <td>@contact.Phone</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a role="button" class="btn btn-outline-success" asp-route-id="@contact.Id" asp-controller="Contacto" asp-action="Edit">Edit</a>
+                                    <a role="button" class="btn btn-outline-danger" asp-route-id="@contact.Id" asp-controller="Contacto" asp-action="ConfirmDelete">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+
         </tbody>
     </table>
 
